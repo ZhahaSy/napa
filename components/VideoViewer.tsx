@@ -5,10 +5,20 @@ import { Image, Modal, Pressable, View } from "react-native";
 const VideoViewer = ({ url }: { url: string }) => {
   const player = useVideoPlayer({ uri: url });
 
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  player.addListener('playingChange', (newIsPlaying) => {
+    setIsPlaying(newIsPlaying)
+  })
   return (
     <>
       <VideoView
-        style={{
+        style={isPlaying ? {
+          minWidth: 250,
+          maxWidth: 300,
+          minHeight: 250,
+          maxHeight: 300,
+        } :{
           minWidth: 150,
           maxWidth: 200,
           minHeight: 150,

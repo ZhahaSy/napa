@@ -46,7 +46,6 @@ export default function App() {
     if (!result.canceled) {
       const imgMsgs: IMessage[] = result.assets.map((item) => {
         if (item.type === "video" || item.uri.includes("data:video")) {
-          console.log(item);
           return {
             _id: messages.length + 1,
             text: "",
@@ -70,8 +69,6 @@ export default function App() {
         };
       });
       onSend(imgMsgs);
-    } else {
-      alert("You did not select any image.");
     }
   }
 
@@ -80,7 +77,8 @@ export default function App() {
       <Actions
         {...props}
         options={{
-          ["Send Image"]: handlePickImage,
+          ["图片或视频"]: handlePickImage,
+          ["取消"]: () => {},
         }}
         icon={() => <EvilIcons name={"plus"} size={28} />}
       />
